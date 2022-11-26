@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
+      tuits: [],
       demo: [
         {
           title: "FIRST",
@@ -35,6 +36,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      getFeed: async () => {
+        try {
+          const resp = await fetch(process.env.BACKEND_URL + "/api/tweets");
+          const data = await resp.json();
+
+          setStore({ tuits: data });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
