@@ -1,31 +1,36 @@
 import React, { useContext } from "react";
 
+import Tuit from "../component/Tuit.jsx";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+
+import NuevoTuit from "../component/NewTuit.jsx";
+import SideBar from "../component/SideBar.jsx";
+import Search from "../component/Search.jsx";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="text-center mt-5">
-      <h1>CHwitter🛫</h1>
-
-      <div className="alert alert-info">
-        {store.tuits &&
-          store.tuits.map((tweet, index) => {
-            return (
-              <div key={index} className="card bg-primary text-start p-3 my-2">
-                <figure className="mb-0">
-                  <blockquote className="blockquote text-white">
-                    <p>{tweet.content + ` ` + tweet.date}</p>
-                  </blockquote>
-                  <figcaption className="blockquote-footer mb-0 text-white">
-                    <cite title="Source Title">{tweet.author.username}</cite>
-                  </figcaption>
-                </figure>
-              </div>
-            );
-          })}
+    <div className="">
+      <div className="row">
+        <div className="col-2 d-flex flex-column">
+          <SideBar />
+        </div>
+        {/* Feed */}
+        <div className="col-6">
+          <h3>Inicio</h3>
+          <NuevoTuit />
+          <div className="alert alert-info">
+            {store.tuits &&
+              store.tuits.map((chTuit, index) => {
+                return <Tuit key={index} tweet={chTuit} />;
+              })}
+          </div>
+        </div>
+        <div className="col-4">
+          <Search />
+        </div>
       </div>
     </div>
   );
