@@ -7,7 +7,6 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
 @api.route('/user', methods=['GET','POST'])
 def handle_user():
     if request.method == 'GET':
