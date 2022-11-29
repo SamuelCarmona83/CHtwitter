@@ -5,6 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Tweet
 from api.utils import generate_sitemap, APIException
 
+from flask_jwt_extended import jwt_required
+
 api = Blueprint('api', __name__)
 
 @api.route('/user', methods=['GET','POST'])
@@ -61,6 +63,7 @@ def get_tweets():
 
 
 @api.route('/tweets', methods=['POST'])
+@jwt_required()
 def post_tweet():
     body = request.json
     if "content" not in body:
