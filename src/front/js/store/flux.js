@@ -48,6 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      getProfile: async () => {
+        console.log("Vamos a recapitular 🥝");
+      },
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
