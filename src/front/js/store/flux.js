@@ -69,8 +69,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       postChuit: async (chuit) => {
-        ///api/tweets
-        //
         const store = getStore();
 
         let response = await fetch(process.env.BACKEND_URL + "/api/tweets", {
@@ -85,7 +83,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }), // body data type must match "Content-Type" header
         });
         let data = await response.json();
-        console.log(data);
         if (data) {
           alert("Chuit creado con exito");
           setStore({ tuits: [data, ...store.tuits] });
