@@ -20,21 +20,23 @@ const Search = () => {
         <div className="">
           <h4>Trending Now 🆕</h4>
 
-          <div class="card">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-light text-start">#Florentino</li>
-              <li class="list-group-item bg-light text-start">
+          <div className="card">
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item bg-light text-start">
+                #Florentino
+              </li>
+              <li className="list-group-item bg-light text-start">
                 #Miguel Cabrera
               </li>
-              <li class="list-group-item bg-light text-start">#CR7</li>
-              <li class="list-group-item bg-light text-start">#Cavani</li>
-              <li class="list-group-item bg-light text-start">
+              <li className="list-group-item bg-light text-start">#CR7</li>
+              <li className="list-group-item bg-light text-start">#Cavani</li>
+              <li className="list-group-item bg-light text-start">
                 #CaneloVsMessi
               </li>
-              <li class="list-group-item bg-light text-start">
+              <li className="list-group-item bg-light text-start">
                 Messi balón de oro
               </li>
-              <li class="list-group-item bg-light text-start">
+              <li className="list-group-item bg-light text-start">
                 vinicius balon de oro
               </li>
             </ul>

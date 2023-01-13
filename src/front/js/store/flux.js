@@ -3,6 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       tuits: [],
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzY0ODcxMiwianRpIjoiNmI2ZWY0MjItODI1NS00Y2NkLTg3MTUtNDIyODI4ZmUwMTYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNhbXVlbGljIiwibmJmIjoxNjczNjQ4NzEyLCJleHAiOjE2NzM2NDk2MTJ9.9lXAA4AYSXT9fcdkMmia79kp1flkNfRKqGFhrFUlLK8",
       demo: [
         {
           title: "FIRST",
@@ -64,6 +66,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+
+      postChuit: async (chuit) => {
+        ///api/tweets
+        //
+        const store = getStore();
+
+        let response = await fetch(process.env.BACKEND_URL + "/api/tweets", {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + store.token,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({
+            content: chuit,
+          }), // body data type must match "Content-Type" header
+        });
+        let data = await response.json();
+        console.log(data);
+        if (data) {
+          alert("Chuit creado con exito");
+          setStore({ tuits: [data, ...store.tuits] });
+        }
       },
     },
   };

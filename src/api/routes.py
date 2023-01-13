@@ -40,7 +40,7 @@ def handle_user():
             try:
                 db.session.add(new_user)
                 db.session.commit()
-                return ""
+                return "Se ha creado el usuario con exito!✅"
             except Exception as err:
                 return 'Ha ocurrido un error!💥', 500
             #User(email, password, username, profile_name)
@@ -81,9 +81,9 @@ def post_tweet():
             db.session.add(new_tweet) #Memoria RAM
             try:
                 db.session.commit() #Guarda en datos solidos!
-                return "Tuit creado con exito! 🦄", 201
+                return jsonify(new_tweet.serialize()), 201
             except Exception as err:
-                return "Ocurrio un error en el servidor 🐬", 500
+                return jsonify({ "error": "Ocurrio un error en el servidor 🐬"}), 500
         #return jsonify(new_tweet.serialize()), 201
     return "Error algo ah ocurrido! 🐋", 404
 
