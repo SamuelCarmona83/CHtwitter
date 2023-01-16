@@ -77,7 +77,7 @@ def post_tweet():
         if author == None:
             return "Ese usuario no existe en tuiter.", 404
         else:
-            new_tweet = Tweet(body["content"], author)
+            new_tweet = Tweet(body["content"], author, body["image"])
             db.session.add(new_tweet) #Memoria RAM
             try:
                 db.session.commit() #Guarda en datos solidos!

@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       tuits: [],
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzY0ODcxMiwianRpIjoiNmI2ZWY0MjItODI1NS00Y2NkLTg3MTUtNDIyODI4ZmUwMTYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNhbXVlbGljIiwibmJmIjoxNjczNjQ4NzEyLCJleHAiOjE2NzM2NDk2MTJ9.9lXAA4AYSXT9fcdkMmia79kp1flkNfRKqGFhrFUlLK8",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzkwODEzOCwianRpIjoiNTFiOTM5NjEtNjk3MC00NDIyLWJkYzgtNGY0NWE5OTI2NGJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNhbXVlbGljIiwibmJmIjoxNjczOTA4MTM4LCJleHAiOjE2NzM5MDkwMzh9.Tben_ZRzSKtsGMDepu8ZwzXGt6cp4A2GqmWcfqdTbW8",
       demo: [
         {
           title: "FIRST",
@@ -68,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ demo: demo });
       },
 
-      postChuit: async (chuit) => {
+      postChuit: async (chuit, url) => {
         const store = getStore();
 
         let response = await fetch(process.env.BACKEND_URL + "/api/tweets", {
@@ -80,6 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             content: chuit,
+            image: url,
           }), // body data type must match "Content-Type" header
         });
         let data = await response.json();

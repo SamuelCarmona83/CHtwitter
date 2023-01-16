@@ -54,13 +54,16 @@ class Tweet(db.Model): #Query
 
     #foreing key siempre del lado N
     author_id = db.Column( db.Integer, db.ForeignKey('user.id'))
+    image = db.Column(db.String(1526), nullable=True)
 
     author = db.relationship("User", backref="tweets")
 
-    def __init__(self, content, author):
+
+    def __init__(self, content, author, image):
         self.content = content
         self.date = datetime.datetime.today()
         self.author = author
+        self.image = image
 
     def __repr__(self):
         return '<Tweet => %r>' % self.id
@@ -69,7 +72,8 @@ class Tweet(db.Model): #Query
         return {
             "content": self.content,
             "date": arrow.get(self.date).humanize(),
-            "author": self.author.serialize() if self.author != None else 'No author'
+            "author": self.author.serialize() if self.author != None else 'No author',
+            "image": self.image
         }
 
     def get_content(self):

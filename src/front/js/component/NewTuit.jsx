@@ -4,16 +4,42 @@ import { Context } from "../store/appContext";
 const NewTuit = () => {
   const { store, actions } = useContext(Context);
   const [chuit, setChuit] = useState();
+
   const [image, setImage] = useState();
+  const [file, setFile] = useState();
 
   const postChuit = async () => {
     //console.log("Post the chuit ✅");
-    actions.postChuit(chuit);
+    actions.postChuit(chuit, image);
     setChuit("");
   };
 
+  const uploadImage = async () => {
+    const urlCloudinary =
+      "https://api.cloudinary.com/v1_1/dd0wschpy/image/upload";
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    formData.append("upload_preset", "rvpoparu");
+
+    try {
+      let resp = await fetch(urlCloudinary, {
+        method: "POST",
+        body: formData,
+      });
+
+      let data = await resp.json();
+      setImage(data.url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const loadImage = (evento) => {
-    setImage(URL.createObjectURL(evento[0]));
+    //setImage(URL.createObjectURL(evento[0]));
+    setFile(evento[0]);
   };
 
   return (
@@ -35,7 +61,7 @@ const NewTuit = () => {
             name="imagen"
             accept="image/*"
           />
-          <span className="text-info d-flex flex-row">
+          <span className="text-info d-flex flex-row" onClick={uploadImage}>
             <i className="fa-solid fa-image my-auto mx-4"></i>
           </span>
           <button className="btn btn-info m-1 " onClick={postChuit}>
